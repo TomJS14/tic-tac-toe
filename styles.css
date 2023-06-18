@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.start {
+    background: #5E5DF0;
+    border-radius: 99px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+    
+}
+
+.start:hover {
+    scale: 1.5
+}
+
+
+.game-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+    height: 100vh;
+    background-color:darkkhaki;
+}
+
+.board {
+    display: none; /* Updated to grid in JS */
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, auto);
+    
+    
+}
+
+.cell {
+    border: 1px solid black;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+}
+
+.cell:first-child, .cell:nth-child(4n), .cell:nth-child(7n)  {
+    border-left: none;
+}
+
+.cell:nth-child(-n + 3) {
+    border-top: none;
+}
+
+.cell:nth-child(7n), .cell:nth-child(8n), .cell:nth-child(9n){
+    border-bottom: none;
+}
+
+.cell:nth-child(3n), .cell:nth-child(6n), .cell:nth-child(9n) {
+    border-right: none;
+}
+
+
+/* Temp fix, why is border left missing? */
+.cell:nth-child(8n) {
+    border-left: 1px solid black;
+}
+
+.winning-message {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+
+
