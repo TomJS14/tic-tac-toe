@@ -8,8 +8,8 @@ let gameActive = false
 let gameState = ["","", "", "", "", "", "", "", "", ] // move this into game function
 
 
-const winningMessage = () => `${currentPlayer} has won`;
-const drawMessage = () => `Game ended in a draw`;
+const winningMessage = () => `${currentPlayer} has won!`;
+const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It is ${currentPlayer}'s turn`
 
 const winningConditions = [
@@ -23,6 +23,35 @@ const winningConditions = [
     [2, 4, 6]
 
 ];
+
+// Initialise game - Display the grid with start game button
+start.addEventListener("click", () => {
+    gameActive = true;
+    gameState = ["","", "", "", "", "", "", "", "", ];
+    document.querySelectorAll(".cell")
+                .forEach(cell => cell.textContent = "")
+    currentPlayer = player_X
+    statusDisplay.textContent = currentPlayerTurn()
+    
+    
+    start.textContent = "Restart"
+    gridSquare.setAttribute("style", "display: grid")   
+    
+})
+
+/* Get a random choice from the available spots on the board */
+function getAiChoice() {
+    const availableSpots = [];
+    for (let i=0; i < gameState.length; i++) {
+        if (gameState[i] === "") {
+            availableSpots.push(i);
+        }
+    }
+    const randomIndex = Math.floor(Math.random() * availableSpots.length);
+    const aiChoice = availableSpots[randomIndex]
+    console.log(aiChoice)
+    return aiChoice
+}
 
 
 function handleResultValidation() {
@@ -65,25 +94,10 @@ function handleResultValidation() {
 };
 
 
-function handlePlayerChange() {
-    currentPlayer = currentPlayer === player_X ? player_O : player_X;
-    statusDisplay.textContent = currentPlayerTurn()
+function handlePlayerChange() {   
+    currentPlayer = currentPlayer === player_X ? player_O : player_X; 
+    statusDisplay.textContent = currentPlayerTurn() 
 }
-
-
-// Initialise game - Display the grid with start game button
-start.addEventListener("click", () => {
-    gameActive = true;
-    gameState = ["","", "", "", "", "", "", "", "", ];
-    document.querySelectorAll(".cell")
-                .forEach(cell => cell.textContent = "")
-    currentPlayer = player_X
-    
-    
-    start.textContent = "Restart"
-    gridSquare.setAttribute("style", "display: grid")   
-    
-})
 
 
 //Game logic - wrapped in an IIFE
@@ -95,16 +109,17 @@ start.addEventListener("click", () => {
     
     if (clickedCell.textContent === "" && clickedCell.textContent != "x" && clickedCell.textContent != "O" ) {
         clickedCell.textContent = currentPlayer
-        gameState[clickedCellIndex] = currentPlayer;
-        
-    }
-        
-        handleResultValidation()
-         
-        
+        if (currentPlayer == player_X) {
+            clickedCell.setAttribute("style", "color: green")}
 
+          
+        else {clickedCell.setAttribute("style", "color: red")}
+        gameState[clickedCellIndex] = currentPlayer;
+        handleResultValidation()
+        }
+      }
     }
-})}())
+)}())
 
 
 
