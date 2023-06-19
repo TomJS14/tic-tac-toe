@@ -8,7 +8,7 @@
 
 4. Display modal at start of game, to include the start game button, also include the form element (Re-use logic from library)
 
-5. Add logic to play against computer
+5. Add minimax algorithm for unbeatable AI
 
 6. Add on hover effect to display the players token
 

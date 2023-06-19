@@ -54,6 +54,16 @@ function getAiChoice() {
 }
 
 
+function makeAiMove() {    
+    const aiChoice = getAiChoice();
+    gameState[aiChoice] = player_O;
+    const aiCell = document.querySelector(`[data-cell-index="${aiChoice}"]`);
+    aiCell.textContent = player_O;
+    aiCell.style.color = "red";
+    handleResultValidation()    
+}
+
+
 function handleResultValidation() {
     let roundWon = false;
     let draw = !gameState.includes(""); //true if no empty string found in array
@@ -89,14 +99,12 @@ function handleResultValidation() {
     }
 
     handlePlayerChange()
-
-
 };
 
 
-function handlePlayerChange() {   
+function handlePlayerChange() {  
     currentPlayer = currentPlayer === player_X ? player_O : player_X; 
-    statusDisplay.textContent = currentPlayerTurn() 
+    statusDisplay.textContent = currentPlayerTurn()
 }
 
 
@@ -104,19 +112,15 @@ function handlePlayerChange() {
 (function () {gridSquare.addEventListener("click", e => {
     let clickedCell = e.target
     let clickedCellIndex = parseInt(clickedCell.getAttribute("data-cell-index"))
-    if (gameActive) {
-    statusDisplay.textContent = currentPlayerTurn()
     
-    if (clickedCell.textContent === "" && clickedCell.textContent != "x" && clickedCell.textContent != "O" ) {
+    if (gameActive && gameState[clickedCellIndex] === "") {
+        statusDisplay.textContent = currentPlayerTurn();
+        
+        clickedCell.setAttribute("style", "color: green")
         clickedCell.textContent = currentPlayer
-        if (currentPlayer == player_X) {
-            clickedCell.setAttribute("style", "color: green")}
-
-          
-        else {clickedCell.setAttribute("style", "color: red")}
         gameState[clickedCellIndex] = currentPlayer;
         handleResultValidation()
-        }
+        makeAiMove()
       }
     }
 )}())
