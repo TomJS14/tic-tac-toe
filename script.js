@@ -5,7 +5,7 @@ const player_X = "X";
 const player_O = "O";
 let currentPlayer = player_X
 let gameActive = false 
-let gameState = ["","", "", "", "", "", "", "", "", ] // move this into game function
+let gameState = ["","", "", "", "", "", "", "", "", ] 
 
 
 const winningMessage = () => `${currentPlayer} has won!`;
@@ -21,23 +21,20 @@ const winningConditions = [
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-
-];
+    ];
 
 // Initialise game - Display the grid with start game button
-start.addEventListener("click", () => {
+function initializeGame() {
     gameActive = true;
     gameState = ["","", "", "", "", "", "", "", "", ];
     document.querySelectorAll(".cell")
                 .forEach(cell => cell.textContent = "")
     currentPlayer = player_X
     statusDisplay.textContent = currentPlayerTurn()
-    
-    
     start.textContent = "Restart"
     gridSquare.setAttribute("style", "display: grid")   
     
-})
+};
 
 /* Get a random choice from the available spots on the board */
 function getAiChoice() {
@@ -49,12 +46,14 @@ function getAiChoice() {
     }
     const randomIndex = Math.floor(Math.random() * availableSpots.length);
     const aiChoice = availableSpots[randomIndex]
-    console.log(aiChoice)
     return aiChoice
 }
 
 
-function makeAiMove() {    
+function makeAiMove() {
+    if (!gameActive) {
+        return;
+    }    
     const aiChoice = getAiChoice();
     gameState[aiChoice] = player_O;
     const aiCell = document.querySelector(`[data-cell-index="${aiChoice}"]`);
@@ -108,22 +107,23 @@ function handlePlayerChange() {
 }
 
 
-//Game logic - wrapped in an IIFE
-(function () {gridSquare.addEventListener("click", e => {
+function handleCellClick(e) {
     let clickedCell = e.target
     let clickedCellIndex = parseInt(clickedCell.getAttribute("data-cell-index"))
     
-    if (gameActive && gameState[clickedCellIndex] === "") {
+    if (gameActive && currentPlayer == player_X && gameState[clickedCellIndex] === "") {
         statusDisplay.textContent = currentPlayerTurn();
         
-        clickedCell.setAttribute("style", "color: green")
+        clickedCell.style.color = "green";
         clickedCell.textContent = currentPlayer
         gameState[clickedCellIndex] = currentPlayer;
         handleResultValidation()
-        makeAiMove()
+        setTimeout(makeAiMove, 650);
       }
     }
-)}())
 
+//initialise game
+start.addEventListener("click", initializeGame); 
 
-
+//Game logic
+gridSquare.addEventListener("click", handleCellClick)

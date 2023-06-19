@@ -1,24 +1,16 @@
-**To Do**
+**To return and do**
 
 1. Refactor and focus on minimal global code - using factories & modules 
 
-2. Add a form element to ask for the players name, setting this to the status and result messages
+2. Add minimax algorithm for unbeatable AI
 
-3. Add a modal to pop up when the game is won, move the button to the modal
-
-4. Display modal at start of game, to include the start game button, also include the form element (Re-use logic from library)
-
-5. Add minimax algorithm for unbeatable AI
-
-6. Add on hover effect to display the players token
+3. Add on hover effect to display the players token
 
 
 
 
 
-**pseudocode**
-
-
+**My pseudocode**
 
 Create a 3x3 grid as a two-dimensional array to represent the game board
 
@@ -30,9 +22,9 @@ Create a 3x3 grid as a two-dimensional array to represent the game board
 
 Create a variable to keep track of the current player (start with player X)
 
-Create a variable to keep track of the game status (ongoing, won, or tie)
+Create a variable to keep track of the game status (ongoing, won,)
 
-Display the initial grid
+Display the initial grid after button pressed
 
 Repeat the following steps until the game status changes:
     - Wait for the current player's input (click or selection)
@@ -52,7 +44,7 @@ If the game was won:
 Else if the game was a tie:
     - Display a message indicating a tie game
 
-Wait for any further user input (click or selection) to restart the game
+Wait for user input (click or selection) to restart the game
 
 Restart the game (reset the grid, current player, and game status)
 

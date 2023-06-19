@@ -40,6 +40,7 @@ main {
 
 .game-container {
     display: flex;
+    display: -webkit-flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -59,8 +60,8 @@ main {
 
 .cell {
     border: 1px solid black;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     background-color: transparent;
     font-size: 4rem;
     font-weight: 800;
@@ -96,6 +97,8 @@ main {
     text-align: center;
     width: 50%;
 }
+
+
 
 .footer {
     display: flex;
